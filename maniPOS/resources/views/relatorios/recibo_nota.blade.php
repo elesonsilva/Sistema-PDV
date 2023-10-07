@@ -1,0 +1,192 @@
+<div id="invoice-mani">
+<!-- SEÇÃO DE IMPRIMIR -->
+<div id="printed_content">
+
+
+<center id="top">
+    <div class="logo"><img src="logocopia.png" alt="" style=" height: 100px;
+    width: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto"></div>
+    <!-- <div class="info"></div>
+    <h2>Mani.Tupi</h2> -->
+</center>
+</div>
+
+<div class="mid">
+    <div class="info">
+        <!-- <h2>Contato</h2> -->
+        <p>
+            WhatsApp:(91)98176-1249
+            Instagram:@mani.tupi
+        </p>
+    </div>
+</div>
+<!-- FIM DO MID -->
+
+<div class="bot">
+@foreach($orderedBy as $orde)
+<h2>{{ $orde->nome}}</h2>
+@endforeach
+    <div id="table">
+        <table class="tabletitle">
+            <tr>
+                <td class="item"><h2>Prato</h2></td>
+                <td class="avaliar"><h2>Qtd</h2></td>
+                <td class="avaliar"><h2>valor uni</h2></td>
+                <td class="avaliar"><h2>Desconto</h2></td>  
+                <td class="avaliar"><h2>SubTotal</h2></td>
+            </tr>      
+            @foreach($orders_receipt as $recibo)
+            
+            <tr class="service">
+                <td class="tableitem"><p class="itemtext">{{ $recibo->produto->nome}}</p></td>
+                <td class="tableitem"><p class="itemtext">{{ $recibo->quantidade}}</td>
+                <td class="tableitem"><p class="itemtext">R${{ number_format ($recibo->preco_unitario,2 )}}</td>
+                <td class="tableitem"><p class="itemtext">{{ $recibo->desconto ? '':'0'}}</td>
+                <td class="tableitem"><p class="itemtext">R${{ number_format ($recibo->montande,2 )}}</td>
+               
+                
+                
+              
+            </tr>
+            @endforeach
+            <tr class="tabletitle">
+                <td></td>
+                <td></td>
+                <td></td>
+               
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="tabletitle">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="avaliar">TOTAL</td>
+                <td class="payment" style="font-size:2.0em">R$ {{ number_format ($orders_receipt->sum('montande'),2 )}}<h2>
+
+                </h2></td>
+            </tr>
+            
+        </table>
+        @foreach($orderpag as $pag)
+        <p style=" line-height:0.2em">Forma de Pagamento: {{ $pag->metodo_pagamento}}</p>
+        <p style=" line-height:0.2em">Troco R$: {{ number_format ( $pag->saldo,2)}}</p>
+
+        @endforeach
+        <div class="legalcopy" style=" margin-top:5mm;
+    text-align:center">
+            <p class="legal">
+            <strong>**OBRIGADO**</strong><br>
+            algum texto de agradecimento
+            </p>
+        </div>
+        <div class="serial-number">
+            Serial:<span class="serial">
+                123456789
+            </span>
+            <span>19/01/2023 &nbsp; &nbsp; 00:45</span>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<style>
+#invoice-mani{
+    box-shadow: 0 0 1in -0.25in rgb(0, 0, 0.5);
+    padding: 2mm;
+    margin: 0 auto;
+    width: 60mm;
+    background: #fff;
+}
+
+#invoice-mani ::selection{
+    background: #f315f3;
+    color: #fff;
+}
+#invoice-mani ::-moz-selection{
+    background: #f315f3;
+    color: #fff;
+}
+#invoice-mani h1{
+    font-size: 1.5em;
+    color:#222;
+}
+#invoice-mani h2{
+    font-size: 0.5em;
+}
+#invoice-mani h3{
+    font-size: 1.2em;
+    font-weight:300;
+    line-height:2em;
+}
+#invoice-mani p{
+    font-size: 0.7em;
+    line-height:0.9em;
+    color:#666;
+}
+#invoice-mani #top, ##invoice-mani #mid, #invoice-mani #bot{
+    border-bottom: 1px solid #eee;   
+}
+#invoice-mani #top{
+    min-heigth: 100px ;    
+}
+#invoice-mani #mid{
+    min-heigth: 80px ;    
+}
+#invoice-mani #bot{
+    min-heigth: 50px ;    
+}
+/* #invoice-mani #top .logo{
+    height: 60px;
+    width: 60px;
+    background-image:url()no-repeat;    
+    background-size:60px 60px;
+    border-radius:50px;    
+} */
+#invoice-mani .info{
+    display: block;
+    margin-left:0;
+    text-align:center;      
+}
+#invoice-mani .title{
+    float:right;
+}
+#invoice-mani .title p{
+    text-align:right;
+}
+#invoice-mani table{
+    width: 100%;
+    border-collapse:collapse;
+}
+#invoice-mani .tabletitle{
+    font-size: 0.5em;
+    background:#eee;
+}
+#invoice-mani .service{
+    border-bottom: 1px solid #eee;   
+}
+#invoice-mani .item{
+    width: 24mm;
+}
+#invoice-mani .itemtext{
+    font-size: 0.9em;
+}
+#invoice-mani #legalcopy{
+    margin-top:5mm;
+    text-align:center;
+}
+.serial-number{
+    margin-top:5mm;
+    margin-bottom:2mm;
+    text-align:center;
+    font-size:12px;
+}
+.serial{
+    font-size:10px !important;
+    
+}
+</style>
